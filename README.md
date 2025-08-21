@@ -22,7 +22,7 @@ Es berücksichtigt **Pflichtbesetzungen, Verfügbarkeiten, Urlaub, Präferenzen 
 ## 📦 Installation
 
 ```bash
-git clone https://github.com/<dein-user>/kino-schichtplaner.git
+git clone https://github.com/LeviGPunkt/kino-schichtplaner.git
 cd kino-schichtplaner
 pip install -r requirements.txt
 ```
@@ -32,35 +32,35 @@ pip install -r requirements.txt
 ```mermaid
 flowchart TD
     subgraph ARCHITEKTUR["Kino-Schichtplaner – Architektur & Datenfluss"]
-      A[Konfiguration<br/>(Personal, Urlaub, Pflicht, Wünsche, Paare, Frequenz, Tuning)] --> B
-      B[Modellierung (CP-SAT)<br/>Binärvariablen, Paar-Variablen, Loads] --> C{Harte Regeln}
+      A[Konfiguration: Personal, Urlaub, Pflicht, Wünsche, Paare, Frequenz, Tuning] --> B
+      B[Modellierung CP-SAT: Binärvariablen, Paar-Variablen, Loads] --> C{Harte Regeln}
       B --> D((Zielfunktion))
 
       C --> C1[Pflichtdeckung exakt]
-      C --> C2[Urlaub & Unverfügbarkeiten]
+      C --> C2[Urlaub und Unverfügbarkeiten]
       C --> C3[Inkompatibilitäts-Paare]
-      C --> C4[Tagesregeln max 2/Tag]
-      C --> C5[Back-to-back-Verbot Mi+Do/Do+Fr]
+      C --> C4[Tagesregeln max 2 pro Tag]
+      C --> C5[Back-to-back-Verbot Mi-Do, Do-Fr]
       C --> C6[Erholung Fr20→Sa14, Sa20→So14]
-      C --> C7[Wochenende: 14==17 nur wenn gebraucht]
-      C --> C8[Wochenlimit max 2/Woche]
-      C --> C9[Pro-rata Fairness (Urlaub)]
-      C --> C10[Wunschpaar-Prozente MIN/MAX]
-      C --> C11[Frequenz-Regeln Fensterweise]
+      C --> C7[Wochenende 14 und 17 nur wenn gebraucht]
+      C --> C8[Wochenlimit max 2 pro Woche]
+      C --> C9[Pro-rata Fairness Urlaub]
+      C --> C10[Wunschpaar-Prozente MIN und MAX]
+      C --> C11[Frequenz-Regeln fensterweise]
 
-      D --> D1[+ W_WISH · Wünsche]
-      D --> D2[- W_SPREAD · Spread]
-      D --> D3[- W_SLOTDEV · Slot-Abweichungen]
-      D --> D4[+ W_PAIR · Paare]
+      D --> D1[+ W_WISH Wünsche]
+      D --> D2[- W_SPREAD Spread]
+      D --> D3[- W_SLOTDEV Slot-Abweichungen]
+      D --> D4[+ W_PAIR Paare]
 
       subgraph LOOP["Solver-Loop mit Tuning"]
-        L1[Attempt 0..N<br/>spread_caps, slot_cap_add_list variieren] --> L2[Seeds 1..k<br/>random_seed wechseln]
-        L2 --> L3{FEASIBLE/OPTIMAL?}
+        L1[Attempt 0..N: spread_caps, slot_cap_add_list variieren] --> L2[Seeds 1..k: random_seed wechseln]
+        L2 --> L3{FEASIBLE oder OPTIMAL}
         L3 -- nein --> L1
       end
 
       C & D --> LOOP
-      LOOP -->|ja| E[Plan & Berichte]
+      LOOP -->|ja| E[Plan und Berichte]
       E --> O1[Finaler Plan]
       E --> O2[Audit Pflichtdeckung]
       E --> O3[Verteilung gesamt]
