@@ -25,6 +25,9 @@ Es berücksichtigt **Pflichtbesetzungen, Verfügbarkeiten, Urlaub, Präferenzen 
 git clone https://github.com/<dein-user>/kino-schichtplaner.git
 cd kino-schichtplaner
 pip install -r requirements.txt
+```
+
+## 📊 Architektur & Datenfluss
 
 ```mermaid
 flowchart TD
@@ -64,3 +67,4 @@ flowchart TD
       E --> O4[Verteilung je Slottyp]
       E --> O5[Wunschpaare-Statistik]
     end
+```
