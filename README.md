@@ -32,8 +32,8 @@ pip install -r requirements.txt
 ```mermaid
 flowchart TD
     subgraph ARCHITEKTUR["Kino-Schichtplaner – Architektur & Datenfluss"]
-      A[Konfiguration\n(Personal, Urlaub, Pflicht, Wünsche, Paare, Frequenz, Tuning)] --> B
-      B[Modellierung (CP-SAT)\nBinärvariablen, Paar-Variablen, Loads] --> C{Harte Regeln}
+      A[Konfiguration<br/>(Personal, Urlaub, Pflicht, Wünsche, Paare, Frequenz, Tuning)] --> B
+      B[Modellierung (CP-SAT)<br/>Binärvariablen, Paar-Variablen, Loads] --> C{Harte Regeln}
       B --> D((Zielfunktion))
 
       C --> C1[Pflichtdeckung exakt]
@@ -54,7 +54,7 @@ flowchart TD
       D --> D4[+ W_PAIR · Paare]
 
       subgraph LOOP["Solver-Loop mit Tuning"]
-        L1[Attempt 0..N\nspread_caps, slot_cap_add_list variieren] --> L2[Seeds 1..k\nrandom_seed wechseln]
+        L1[Attempt 0..N<br/>spread_caps, slot_cap_add_list variieren] --> L2[Seeds 1..k<br/>random_seed wechseln]
         L2 --> L3{FEASIBLE/OPTIMAL?}
         L3 -- nein --> L1
       end
@@ -67,4 +67,3 @@ flowchart TD
       E --> O4[Verteilung je Slottyp]
       E --> O5[Wunschpaare-Statistik]
     end
-```
