@@ -26,6 +26,7 @@ git clone https://github.com/<dein-user>/kino-schichtplaner.git
 cd kino-schichtplaner
 pip install -r requirements.txt
 
+```mermaid
 flowchart TD
     subgraph ARCHITEKTUR["Kino-Schichtplaner – Architektur & Datenfluss"]
       A[Konfiguration\n(Personal, Urlaub, Pflicht, Wünsche, Paare, Frequenz, Tuning)] --> B
